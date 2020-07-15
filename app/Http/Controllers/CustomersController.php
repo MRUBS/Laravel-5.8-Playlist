@@ -9,8 +9,8 @@ class CustomersController extends Controller
 {
     public function list()
     {
-        $activeCustomers = Customer::where('active', 1)->get();
-        $inactiveCustomers = Customer::where('active', 0)->get();
+        $activeCustomers = Customer::active()->get();
+        $inactiveCustomers = Customer::inactive()->get();
 
         // dd($activeCustomers);
         // dd($inactiveCustomers);
@@ -32,11 +32,9 @@ class CustomersController extends Controller
             ]
         );
 
-        $customer = new Customer();
-        $customer->name = request('name');
-        $customer->email = request('email');
-        $customer->active = request('active');
-        $customer->save();
+        // dd($data);
+
+        Customer::create($data);
 
         return back();
 
